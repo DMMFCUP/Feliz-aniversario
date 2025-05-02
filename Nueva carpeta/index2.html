@@ -1,0 +1,626 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Sorpresa Especial Para Ti</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&family=Dancing+Script:wght@400;700&family=Indie+Flower&display=swap');
+      
+      body {
+          font-family: 'Indie Flower', cursive;
+          background-color: #fff5f5;
+          overflow-x: hidden;
+      }
+      
+      .handwritten {
+          font-family: 'Shadows Into Light', cursive;
+      }
+      
+      .romantic {
+          font-family: 'Dancing Script', cursive;
+      }
+      
+      .paper {
+          background-color: #fffaf0;
+          background-image: 
+              linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+              linear-gradient(#eee .1em, transparent .1em);
+          background-size: 100% 1.2em;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+      }
+      
+      .polaroid {
+          background: white;
+          padding: 1rem;
+          box-shadow: 0 0.2rem 1.2rem rgba(0,0,0,0.2);
+          transform: rotate(var(--rotation));
+      }
+      
+      .polaroid img {
+          width: 100%;
+          height: auto;
+      }
+      
+      .polaroid::before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 30px;
+          background: rgba(0,0,0,0.1);
+          z-index: -1;
+      }
+      
+      .heart {
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          background-color: #ff6b6b;
+          transform: rotate(45deg);
+          animation: floating 3s infinite ease-in-out;
+      }
+      
+      .heart:before, .heart:after {
+          content: '';
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          background-color: #ff6b6b;
+          border-radius: 50%;
+      }
+      
+      .heart:before {
+          top: -10px;
+          left: 0;
+      }
+      
+      .heart:after {
+          top: 0;
+          left: -10px;
+      }
+      
+      .butterfly {
+          position: absolute;
+          width: 30px;
+          height: 30px;
+          background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#fab1a0" d="M377.6 11.4c-17.7 10.3-40.3 13.9-59.2 18-42.8 9.4-86.5 14.4-130.3 16.8-11.2.6-22.4.9-33.5 1.6-19 1.2-28.5 8.3-34.3 26.3-11.3 34.8-51.1 80.2-11.6 111.1 13.5 10.5 31.4 16.1 48.3 18.5 10.4 1.5 21 1.6 31.5 1.3 2-.1 2-3.1 0-3-39.2 1-96.5-13.6-102.3-60.5-2.8-22.8 11.4-44.4 24.5-62.1 6.4-8.6 14.4-15.2 25.2-16.7 12.2-1.7 24.9-1.7 37.2-2.2 13.6-.5 27.2-1.6 40.8-2.9 27.6-2.8 55.1-6.5 82.2-12.3 25.1-5.4 53.4-11.5 73.6-27.4 1.7-1.4 4.1.7 2.4 2.1-39.3 31.9-96.7 38.2-144.9 43.9-24.8 2.9-49.7 5-74.5 7.8-7.2.8-14.5 1.5-21.6 3.1-11.9 2.7-20.7 10.9-26.9 21.2-11 18.2-17.3 42.4-9.2 62.7 16.5 41.5 70.3 54.4 110.1 53.1 2-.1 2-3.1 0-3 47.3 1.5 80.1-22.4 84.7-60.7 4.1-33.8-29.4-67.7-50.4-68.8-24.4-1.2-49-3.1-73.4-5.2-25.4-2.2-50.7-5-75.8-9.2-23-3.8-45.8-9-67.5-17.8-9.1-3.7-17.8-8.5-24.9-15.2-1.6-1.5 1-3.6 2.4-2.1 17.5 16.8 43.7 22.1 66.3 27.1 50.9 11.2 103.8 13.1 156 17.8 12.7 1.1 25.3 2.3 37.8 4.8 21.7 4.3 33.5 22.8 42.2 42.1 18.6 41.1-9.2 87.3-52.1 95.1-43.5 7.9-90.8-.9-118.6-38.1 1.1-1.5-1.2-3-2.4-1.5-34.7 46.3-100.8 48.9-147.3 21.9-27.3-15.8-37.3-48.1-27.8-77.2 4.3-13.1 11.8-24.8 23.1-32.9 11.9-8.5 27.3-9.7 41.5-11 30.3-2.8 60.7-5.2 91-8.3 27.6-2.9 55.3-6.3 82.5-11.6 23.8-4.6 47.9-11.6 67.7-25.7 1.6-1.1.1-3.7-1.6-2.5z"/><path fill="#fab1a0" d="M134.4 11.4c17.7 10.3 40.3 13.9 59.2 18 42.8 9.4 86.5 14.4 130.3 16.8 11.2.6 22.4.9 33.5 1.6 19 1.2 28.5 8.3 34.3 26.3 11.3 34.8 51.1 80.2 11.6 111.1-13.5 10.5-31.4 16.1-48.3 18.5-10.4 1.5-21 1.6-31.5 1.3-2-.1-2-3.1 0-3 39.2 1 96.5-13.6 102.3-60.5 2.8-22.8-11.4-44.4-24.5-62.1-6.4-8.6-14.4-15.2-25.2-16.7-12.2-1.7-24.9-1.7-37.2-2.2-13.6-.5-27.2-1.6-40.8-2.9-27.6-2.8-55.1-6.5-82.2-12.3-25.1-5.4-53.4-11.5-73.6-27.4-1.7-1.4-4.1.7-2.4 2.1 39.3 31.9 96.7 38.2 144.9 43.9 24.8 2.9 49.7 5 74.5 7.8 7.2.8 14.5 1.5 21.6 3.1 11.9 2.7 20.7 10.9 26.9 21.2 11 18.2 17.3 42.4 9.2 62.7-16.5 41.5-70.3 54.4-110.1 53.1-2-.1-2-3.1 0-3 47.3 1.5 80.1-22.4 84.7-60.7 4.1-33.8-29.4-67.7-50.4-68.8-24.4-1.2-49-3.1-73.4-5.2-25.4-2.2-50.7-5-75.8-9.2-23-3.8-45.8-9-67.5-17.8-9.1-3.7-17.8-8.5-24.9-15.2-1.6-1.5 1-3.6 2.4-2.1 17.5 16.8 43.7 22.1 66.3 27.1 50.9 11.2 103.8 13.1 156 17.8 12.7 1.1 25.3 2.3 37.8 4.8 21.7 4.3 33.5 22.8 42.2 42.1 18.6 41.1-9.2 87.3-52.1 95.1-43.5 7.9-90.8-.9-118.6-38.1 1.1-1.5-1.2-3-2.4-1.5-34.7 46.3-100.8 48.9-147.3 21.9-27.3-15.8-37.3-48.1-27.8-77.2-4.3-13.1-11.8-24.8-23.1-32.9-11.9-8.5-27.3-9.7-41.5-11-30.3-2.8-60.7-5.2-91-8.3-27.6-2.9-55.3-6.3-82.5-11.6-23.8-4.6-47.9-11.6-67.7-25.7-1.6-1.1.1-3.7 1.6-2.5z"/></svg>');
+          background-size: contain;
+          background-repeat: no-repeat;
+          opacity: 0.7;
+      }
+      
+      @keyframes floating {
+          0%, 100% {
+              transform: rotate(45deg) translateY(0);
+          }
+          50% {
+              transform: rotate(45deg) translateY(-10px);
+          }
+      }
+      
+      .tape {
+          position: absolute;
+          width: 80px;
+          height: 20px;
+          background-color: rgba(255, 255, 255, 0.4);
+          transform: rotate(var(--rotation));
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+      }
+      
+      .confetti {
+          position: absolute;
+          width: 10px;
+          height: 10px;
+          background-color: var(--color);
+          animation: fall var(--duration) ease-in forwards;
+          opacity: 0.8;
+      }
+      
+      @keyframes fall {
+          to {
+              transform: translateY(100vh) rotate(360deg);
+              opacity: 0;
+          }
+      }
+      
+      .ribbon {
+          position: absolute;
+          width: 150px;
+          height: 150px;
+          overflow: hidden;
+      }
+      
+      .ribbon::before,
+      .ribbon::after {
+          position: absolute;
+          z-index: -1;
+          content: '';
+          display: block;
+          border: 5px solid #f06292;
+      }
+      
+      .ribbon-top-right {
+          top: 0;
+          right: 0;
+      }
+      
+      .ribbon-top-right::before,
+      .ribbon-top-right::after {
+          border-top-color: transparent;
+          border-right-color: transparent;
+      }
+      
+      .ribbon-top-right::before {
+          top: 0;
+          left: 0;
+      }
+      
+      .ribbon-top-right::after {
+          bottom: 0;
+          right: 0;
+      }
+      
+      .ribbon-top-right span {
+          position: absolute;
+          top: 30px;
+          right: -25px;
+          transform: rotate(45deg);
+          width: 150px;
+          background-color: #f06292;
+          text-align: center;
+          padding: 5px 0;
+          color: white;
+          font-size: 14px;
+          font-weight: bold;
+          box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+      }
+      
+      /* Mobile-friendly adjustments */
+      @media screen and (max-width: 768px) {
+          .timeline::after {
+              left: 31px;
+          }
+          
+          .timeline-container {
+              width: 100%;
+              padding-left: 70px;
+              padding-right: 25px;
+          }
+          
+          .timeline-container.right {
+              left: 0%;
+          }
+          
+          .timeline-container.left::after, 
+          .timeline-container.right::after {
+              left: 18px;
+          }
+      }
+      
+      /* Styles for image grid */
+      .image-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+          gap: 10px;
+      }
+      .image-grid img {
+          width: 100%;
+          height: auto;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Pantalla de bienvenida -->
+    <div id="welcome-screen" class="fixed inset-0 bg-pink-100 flex flex-col items-center justify-center z-50">
+        <div class="ribbon ribbon-top-right"><span>Para ti ❤️</span></div>
+        <h1 class="romantic text-5xl text-pink-600 animate__animated animate__heartBeat mb-6">¡Hola mi amor!</h1>
+        <p class="handwritten text-2xl text-center mx-8 mb-8">He preparado algo especial para ti...<br>¡Espero que te guste!</p>
+        <button id="enter-btn" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full transform transition hover:scale-105 focus:outline-none shadow-lg">
+            Descubrir la sorpresa
+        </button>
+        <div id="loading" class="hidden mt-4">
+            <p class="handwritten text-xl text-pink-500">Cargando nuestros recuerdos...</p>
+            <div class="w-64 h-3 mt-2 bg-gray-200 rounded-full overflow-hidden">
+                <div id="progress-bar" class="h-full bg-pink-500 rounded-full" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido principal (inicialmente oculto) -->
+    <div id="main-content" class="hidden">
+        <!-- Header -->
+        <header class="py-6 bg-pink-200 shadow-md">
+            <div class="container mx-auto px-4 flex justify-between items-center">
+                <h1 class="romantic text-3xl text-pink-600">Nuestro Rincón Especial</h1>
+                <div class="flex space-x-4">
+                    <button id="love-btn" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full focus:outline-none shadow">
+                        <span class="mr-1">♥</span> Te quiero
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Banner con carta -->
+        <section class="py-10 bg-gradient-to-r from-pink-100 to-purple-100">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="max-w-md mx-auto relative transform -rotate-2">
+                            <div class="paper p-8 relative">
+                                <div class="tape absolute -top-4 left-10" style="--rotation: -5deg;"></div>
+                                <div class="tape absolute -top-3 right-12" style="--rotation: 5deg;"></div>
+                                <h2 class="romantic text-3xl text-pink-700 mb-4">Mi amor,</h2>
+                                <p class="handwritten text-gray-800 mb-4">
+                                    Cada día a tu lado es un regalo que atesoro en mi corazón. Tu sonrisa ilumina mis días y me haces sentir la persona más afortunada del mundo.
+                                </p>
+                                <p class="handwritten text-gray-800 mb-4">
+                                    Quería crear algo especial para ti, algo que reflejara todo el amor que siento y los momentos maravillosos que hemos compartido juntos.
+                                </p>
+                                <p class="handwritten text-gray-800 mb-6">
+                                    Este pequeño rincón digital es solo una pequeña muestra de lo mucho que significas para mí.
+                                </p>
+                                <p class="romantic text-right text-pink-600 text-xl">
+                                    Con todo mi amor,
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 mt-10 md:mt-0 flex justify-center">
+                        <div class="relative">
+                            <div class="polaroid p-4 bg-white shadow-xl max-w-xs transform" style="--rotation: 3deg;">
+                                <img src="imagenes\1.jpg" alt="Nosotros" class="mb-4 rounded">
+                                <p class="handwritten text-center text-gray-700">Nuestro momento especial ❤️</p>
+                                <div class="tape absolute -top-4 left-1/4" style="--rotation: -2deg;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+                <div class="timeline">
+                    <!-- Primera línea de tiempo con fecha 2 de septiembre -->
+                    <div class="timeline-container left">
+                        <center>
+                            <div class="content">
+                                <h3 class="romantic text-2xl text-pink-500">2 de septiembre</h3>
+                                <div class="mt-2 mb-4 flex justify-center">
+                                </div>
+                                <p class="handwritten">Cuando nos marcó el inicio de algo maravilloso mi cielo.</p>
+                            </div>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<!-- Esta sección debe reemplazar tu sección actual de "Recuerdos en imágenes" -->
+<section class="py-12 bg-pink-50">
+    <div class="container mx-auto px-4">
+        <h2 class="romantic text-4xl text-center text-pink-600 mb-8">Nuestros Momentos Especiales</h2>
+        
+        <div class="flex flex-wrap justify-center gap-6 max-w-5xl mx-auto">
+            <!-- Imagen 1 -->
+            <div class="photo-container w-64 h-64 overflow-hidden rounded-lg shadow-lg relative mb-6">
+                <img class="photo w-full h-full object-cover transition-all duration-500" src="imagenes\2.jpg" alt="Salidita al parque">
+                <div class="caption p-3 bg-gradient-to-t from-black/70 to-transparent absolute bottom-0 left-0 right-0 text-white text-center opacity-0 transition-opacity duration-300">Salidita al parque</div>
+                <div class="heart absolute top-4 right-4 text-pink-500 text-xl opacity-0 transition-opacity duration-300">❤️</div>
+            </div>
+            
+            <!-- Imagen 2 -->
+            <div class="photo-container w-64 h-64 overflow-hidden rounded-lg shadow-lg relative mb-6">
+                <img class="photo w-full h-full object-cover transition-all duration-500" src="imagenes\3.jpg" alt="Eres mi media naranja">
+                <div class="caption p-3 bg-gradient-to-t from-black/70 to-transparent absolute bottom-0 left-0 right-0 text-white text-center opacity-0 transition-opacity duration-300">Eres mi media naranja</div>
+                <div class="heart absolute top-4 right-4 text-pink-500 text-xl opacity-0 transition-opacity duration-300">❤️</div>
+            </div>
+            
+            <!-- Imagen 3 -->
+            <div class="photo-container w-64 h-64 overflow-hidden rounded-lg shadow-lg relative mb-6">
+                <img class="photo w-full h-full object-cover transition-all duration-500" src="imagenes\4.jpg" alt="ñam, comida">
+                <div class="caption p-3 bg-gradient-to-t from-black/70 to-transparent absolute bottom-0 left-0 right-0 text-white text-center opacity-0 transition-opacity duration-300">ñam , comida</div>
+                <div class="heart absolute top-4 right-4 text-pink-500 text-xl opacity-0 transition-opacity duration-300">❤️</div>
+            </div>
+            
+            <!-- Imagen 4 -->
+            <div class="photo-container w-64 h-64 overflow-hidden rounded-lg shadow-lg relative mb-6">
+                <img class="photo w-full h-full object-cover transition-all duration-500" src="imagenes\5.jpg" alt="nuestras lindas manos mas las suyas amor">
+                <div class="caption p-3 bg-gradient-to-t from-black/70 to-transparent absolute bottom-0 left-0 right-0 text-white text-center opacity-0 transition-opacity duration-300">nuestras lindas manos mas las suyas amor</div>
+                <div class="heart absolute top-4 right-4 text-pink-500 text-xl opacity-0 transition-opacity duration-300">❤️</div>
+            </div>
+            
+            <!-- Imagen 5 -->
+            <div class="photo-container w-64 h-64 overflow-hidden rounded-lg shadow-lg relative mb-6">
+                <img class="photo w-full h-full object-cover transition-all duration-500" src="imagenes\6.jpg" alt="Tu sonrisa que ilumina mi mundo">
+                <div class="caption p-3 bg-gradient-to-t from-black/70 to-transparent absolute bottom-0 left-0 right-0 text-white text-center opacity-0 transition-opacity duration-300">Tu sonrisa que ilumina mi mundo</div>
+                <div class="heart absolute top-4 right-4 text-pink-500 text-xl opacity-0 transition-opacity duration-300">❤️</div>
+            </div>
+            
+            <!-- Imagen 6 -->
+            <div class="photo-container w-64 h-64 overflow-hidden rounded-lg shadow-lg relative mb-6">
+                <img class="photo w-full h-full object-cover transition-all duration-500" src="imagenes\7.jpg" alt="Mi Lugar seguro:">
+                <div class="caption p-3 bg-gradient-to-t from-black/70 to-transparent absolute bottom-0 left-0 right-0 text-white text-center opacity-0 transition-opacity duration-300">Mi Lugar seguro:</div>
+                <div class="heart absolute top-4 right-4 text-pink-500 text-xl opacity-0 transition-opacity duration-300">❤️</div>
+            </div>
+            
+            <!-- Imagen 7 -->
+            <div class="photo-container w-64 h-64 overflow-hidden rounded-lg shadow-lg relative mb-6">
+                <img class="photo w-full h-full object-cover transition-all duration-500" src="imagenes\8.jpg" alt="Bajo las estrellas">
+                <div class="caption p-3 bg-gradient-to-t from-black/70 to-transparent absolute bottom-0 left-0 right-0 text-white text-center opacity-0 transition-opacity duration-300">Bajo las estrellas</div>
+                <div class="heart absolute top-4 right-4 text-pink-500 text-xl opacity-0 transition-opacity duration-300">❤️</div>
+            </div>
+            
+            <!-- Imagen 8 -->
+            <div class="photo-container w-64 h-64 overflow-hidden rounded-lg shadow-lg relative mb-6">
+                <img class="photo w-full h-full object-cover transition-all duration-500" src="imagenes\9.jpg" alt="Recuerdo bonito de la Flor">
+                <div class="caption p-3 bg-gradient-to-t from-black/70 to-transparent absolute bottom-0 left-0 right-0 text-white text-center opacity-0 transition-opacity duration-300">Recuerdo bonito de la Flor</div>
+                <div class="heart absolute top-4 right-4 text-pink-500 text-xl opacity-0 transition-opacity duration-300">❤️</div>
+            </div>
+            
+            <!-- Imagen 9 -->
+            <div class="photo-container w-64 h-64 overflow-hidden rounded-lg shadow-lg relative mb-6">
+                <img class="photo w-full h-full object-cover transition-all duration-500" src="imagenes\10.jpg" alt="Momentos de felicidad: ñam nuestra galletita">
+                <div class="caption p-3 bg-gradient-to-t from-black/70 to-transparent absolute bottom-0 left-0 right-0 text-white text-center opacity-0 transition-opacity duration-300">Momentos de felicidad: ñam nuestra galletita</div>
+                <div class="heart absolute top-4 right-4 text-pink-500 text-xl opacity-0 transition-opacity duration-300">❤️</div>
+            </div>
+            
+            <!-- Imagen 10 -->
+            <div class="photo-container w-64 h-64 overflow-hidden rounded-lg shadow-lg relative mb-6">
+                <img class="photo w-full h-full object-cover transition-all duration-500" src="imagenes\11.jpg" alt="Por muchos más recuerdos juntos mi amor">
+                <div class="caption p-3 bg-gradient-to-t from-black/70 to-transparent absolute bottom-0 left-0 right-0 text-white text-center opacity-0 transition-opacity duration-300">Por muchos más recuerdos juntos</div>
+                <div class="heart absolute top-4 right-4 text-pink-500 text-xl opacity-0 transition-opacity duration-300">❤️</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Añade este CSS a tu sección de <style> existente -->
+<style>
+.photo-container:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(214, 51, 108, 0.3);
+}
+
+.photo-container:hover .photo {
+    transform: scale(1.1);
+}
+
+.photo-container:hover .caption,
+.photo-container:hover .heart {
+    opacity: 1;
+}
+
+.photo-container:hover .heart {
+    transform: scale(1.2);
+}
+
+/* Para asegurar que las animaciones funcionen correctamente */
+.photo-container, .photo, .caption, .heart {
+    transition: all 0.3s ease;
+}
+</style>
+
+        <!-- Mensajes sorpresa -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="romantic text-4xl text-center text-pink-600 mb-8">Mensajes Especiales</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                    <div class="paper p-4 transform rotate-2 cursor-pointer message-card">
+                        <h3 class="romantic text-xl text-pink-500 mb-2 text-center">Toca para abrir</h3>
+                        <p class="handwritten text-center text-gray-500">Un mensaje secreto para ti...</p>
+                        <div class="message-content hidden p-4 mt-2 bg-pink-100 rounded-lg">
+                            <p class="handwritten text-center">Te amo por todas las pequeñas cosas que haces. Por tu sonrisa al despertar y por cómo me abrazas cuando más lo necesito (Gracias por tenerme siempre tanta paciencia).</p>
+                        </div>
+                    </div>
+                    
+                    <div class="paper p-4 transform -rotate-1 cursor-pointer message-card">
+                        <h3 class="romantic text-xl text-pink-500 mb-2 text-center">Toca para abrir</h3>
+                        <p class="handwritten text-center text-gray-500">Un secreto de mi corazón...</p>
+                        <div class="message-content hidden p-4 mt-2 bg-pink-100 rounded-lg">
+                            <p class="handwritten text-center">Cuando te miro, veo mi presente y mi futuro. No puedo imaginar mi vida sin ti a mi lado corazon.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="paper p-4 transform rotate-1 cursor-pointer message-card">
+                        <h3 class="romantic text-xl text-pink-500 mb-2 text-center">Toca para abrir</h3>
+                        <p class="handwritten text-center text-gray-500">Una confesión para ti...</p>
+                        <div class="message-content hidden p-4 mt-2 bg-pink-100 rounded-lg">
+                            <p class="handwritten text-center">A veces te observo cuando no te das cuenta, solo para apreciar lo afortunado que soy de tenerte en mi vida.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-8 bg-pink-200">
+            <div class="container mx-auto px-4 text-center">
+                <p class="romantic text-xl text-pink-600 mb-2">Con todo mi amor para ti</p>
+                <p class="handwritten">Siempre tuyo mi amor</p>
+                <button id="reset-button" class="mt-4 bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full focus:outline-none shadow-md">
+                    Volver al inicio
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Audio elements (para sonidos de botones y corazones) -->
+    <audio id="heart-sound">
+        <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_0625c1539c.mp3?filename=cute-notification-ringtone-percussion-116096.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="button-sound">
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_c8c8a73467.mp3?filename=click-button-140881.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+      $(document).ready(function() {
+          // Inicializar elementos visuales
+          createHearts(15);
+          createButterflies(10);
+
+          // Botón para entrar
+          $('#enter-btn').on('click', function() {
+              playSound('button-sound');
+              $('#loading').removeClass('hidden');
+              
+              // Simular carga
+              let progress = 0;
+              const interval = setInterval(function() {
+                  progress += 5;
+                  $('#progress-bar').css('width', progress + '%');
+                  
+                  if (progress >= 100) {
+                      clearInterval(interval);
+                      setTimeout(function() {
+                          showMainContent();
+                      }, 500);
+                  }
+              }, 150);
+          });
+          
+          function showMainContent() {
+              $('#welcome-screen').addClass('animate__animated animate__fadeOutUp');
+              setTimeout(function() {
+                  $('#welcome-screen').addClass('hidden');
+                  $('#main-content').removeClass('hidden').addClass('animate__animated animate__fadeIn');
+                  createConfetti(100);
+              }, 1000);
+          }
+          
+          // Botón de amor
+          $('#love-btn').on('click', function() {
+              playSound('heart-sound');
+              showLoveMessage();
+              createHearts(10);
+          });
+          
+          // Tarjetas de mensajes
+          $('.message-card').on('click', function() {
+              playSound('button-sound');
+              $(this).find('.message-content').toggleClass('hidden');
+              if (!$(this).find('.message-content').hasClass('hidden')) {
+                  createHearts(5, $(this));
+              }
+          });
+          
+          // Botón de reset
+          $('#reset-button').on('click', function() {
+              playSound('button-sound');
+              $('#main-content').addClass('animate__animated animate__fadeOut');
+              setTimeout(function() {
+                  location.reload();
+              }, 1000);
+          });
+          
+          // Funciones auxiliares
+          function createHearts(count, parent) {
+              const container = parent || $('body');
+              for (let i = 0; i < count; i++) {
+                  const heart = $('<div class="heart"></div>');
+                  const size = 10 + Math.random() * 15;
+                  const startPositionX = Math.random() * 100;
+                  const startPositionY = Math.random() * 100;
+                  const duration = 3 + Math.random() * 4;
+                  heart.css({
+                      width: size + 'px',
+                      height: size + 'px',
+                      left: startPositionX + '%',
+                      top: startPositionY + '%',
+                      animation: `floating ${duration}s infinite ease-in-out ${Math.random() * 2}s`
+                  });
+                  container.append(heart);
+                  setTimeout(function() {
+                      heart.remove();
+                  }, 10000);
+              }
+          }
+          
+          function createButterflies(count) {
+              for (let i = 0; i < count; i++) {
+                  const butterfly = $('<div class="butterfly"></div>');
+                  const startPositionX = Math.random() * 100;
+                  const startPositionY = Math.random() * 100;
+                  const duration = 15 + Math.random() * 10;
+                  butterfly.css({
+                      left: startPositionX + '%',
+                      top: startPositionY + '%'
+                  });
+                  $('body').append(butterfly);
+                  animateButterfly(butterfly, duration);
+              }
+          }
+          
+          function animateButterfly(butterfly, duration) {
+              const randomX = Math.random() * 100;
+              const randomY = Math.random() * 100;
+              butterfly.animate({
+                  left: randomX + '%',
+                  top: randomY + '%'
+              }, duration * 1000, function() {
+                  animateButterfly(butterfly, duration);
+              });
+          }
+          
+          function createConfetti(count) {
+              for (let i = 0; i < count; i++) {
+                  const confetti = $('<div class="confetti"></div>');
+                  const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#4caf50', '#8bc34a', '#cddc39', '#ffeb3b', '#ffc107', '#ff9800', '#ff5722'];
+                  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                  const size = 5 + Math.random() * 10;
+                  const startPositionX = Math.random() * 100;
+                  const duration = 3 + Math.random() * 4;
+                  confetti.css({
+                      '--color': randomColor,
+                      '--duration': duration + 's',
+                      width: size + 'px',
+                      height: size + 'px',
+                      left: startPositionX + '%',
+                      top: '-5%'
+                  });
+                  $('body').append(confetti);
+                  setTimeout(function() {
+                      confetti.remove();
+                  }, duration * 1000);
+              }
+          }
+          
+          function showLoveMessage() {
+              const messages = [
+                  "Te amo más de lo que las palabras pueden expresar ❤️",
+                  "Eres lo mejor que me ha pasado en la vida ✨",
+                  "Cada día contigo es un regalo 🎁",
+                  "Mi corazón es tuyo para siempre 💖",
+                  "No puedo imaginar mi vida sin ti 💕"
+              ];
+              const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+              const messageBox = $(
+                  `<div class="fixed z-50 top-1/4 left-1/2 transform -translate-x-1/2 bg-white p-4 rounded-lg shadow-lg romantic text-pink-600 text-xl text-center animate__animated animate__fadeInDown">
+                      ${randomMessage}
+                  </div>`
+              );
+              $('body').append(messageBox);
+              setTimeout(function() {
+                  messageBox.removeClass('animate__fadeInDown').addClass('animate__fadeOutUp');
+                  setTimeout(function() {
+                      messageBox.remove();
+                  }, 1000);
+              }, 3000);
+          }
+          
+          function playSound(id) {
+              const sound = $('#' + id)[0];
+              sound.currentTime = 0;
+              sound.play();
+          }
+      });
+    </script>
+  </body>
+</html>
