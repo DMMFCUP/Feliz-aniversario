@@ -260,7 +260,7 @@ C<html>
       .art-frame {
         position: relative;
         padding: 1rem;
-        background: linear-gradient(45deg, #gold, #fff8dc);
+        background: linear-gradient(45deg, #ffd700, #fff8dc);
         box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         transform: perspective(1000px) rotateY(0deg);
         transition: transform 0.6s ease;
@@ -277,7 +277,7 @@ C<html>
         left: 0;
         right: 0;
         bottom: 0;
-        border: 2px solid #gold;
+        border: 2px solid #ffd700;
         transform: translate(8px, 8px);
         transition: transform 0.3s ease;
       }
@@ -286,14 +286,29 @@ C<html>
         transform: translate(0, 0);
       }
 
-      /* Estilos para fuegos artificiales */
+      /* Estilos para estrellas y fuegos artificiales */
+      .star {
+        position: fixed;
+        width: 4px;
+        height: 4px;
+        background: white;
+        border-radius: 50%;
+        animation: twinkle 1s infinite;
+        pointer-events: none;
+      }
+
       .firework {
         position: fixed;
-        width: 5px;
-        height: 5px;
+        width: 4px;
+        height: 4px;
         border-radius: 50%;
         pointer-events: none;
-        z-index: 9999;
+        animation: explode 1s forwards;
+      }
+
+      @keyframes twinkle {
+        0%, 100% { opacity: 0; }
+        50% { opacity: 1; }
       }
 
       @keyframes explode {
@@ -303,6 +318,26 @@ C<html>
         }
         100% {
           transform: scale(30);
+          opacity: 0;
+        }
+      }
+
+      .particle {
+        position: fixed;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        pointer-events: none;
+        animation: particle 1s forwards;
+      }
+
+      @keyframes particle {
+        0% {
+          transform: translate(0, 0) scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(var(--tx), var(--ty)) scale(0);
           opacity: 0;
         }
       }
@@ -706,9 +741,9 @@ C<html>
   </head>
   <body>
     <!-- Pantalla de bienvenida -->
-    <div id="welcome-screen" class="fixed inset-0 bg-gradient-to-br from-pink-100 via-purple-100 to-red-100 flex flex-col items-center justify-center z-50">
+    <div id="welcome-screen" class="fixed inset-0 bg-gradient-to-br from-purple-100 via-pink-100 to-red-100 flex flex-col items-center justify-center z-50">
         <div class="ribbon ribbon-top-right"><span>8 Meses Juntos ❤️</span></div>
-        <h1 class="romantic text-6xl text-pink-600 animate__animated animate__heartBeat mb-6">¡Mi Amor!</h1>
+        <h1 class="romantic text-6xl text-purple-600 animate__animated animate__heartBeat mb-6">¡Mi Amor!</h1>
         <p class="handwritten text-3xl text-center mx-8 mb-8">
             8 meses de amor infinito...<br>
             Cada momento contigo es mágico
@@ -742,9 +777,9 @@ C<html>
     <!-- Contenido principal (inicialmente oculto) -->
     <div id="main-content" class="hidden">
         <!-- Header -->
-        <header class="py-6 bg-pink-200 shadow-md">
+        <header class="py-6 bg-purple-200 shadow-md">
             <div class="container mx-auto px-4 flex justify-between items-center">
-                <h1 class="romantic text-3xl text-pink-600">Nuestro Rincón Especial</h1>
+                <h1 class="romantic text-3xl text-purple-600">Nuestro Rincón Especial</h1>
                 <div class="flex space-x-4">
                     <button id="love-btn" class="rgb-bg love-button text-white font-bold py-3 px-6 rounded-full focus:outline-none shadow-lg transform transition hover:scale-110">
                         <span class="rgb-text">♥ Te Amo ♥</span>
@@ -756,23 +791,23 @@ C<html>
         <!-- Agregar el contador después del header -->
         <section class="py-8 bg-white">
             <div class="container mx-auto px-4">
-                <div class="max-w-3xl mx-auto bg-gradient-to-r from-pink-50 via-purple-50 to-pink-50 rounded-2xl shadow-lg p-8">
-                    <h2 class="romantic text-3xl text-center text-pink-600 mb-6">Contando los días para nuestro 9º mes juntos</h2>
+                <div class="max-w-3xl mx-auto bg-gradient-to-r from-purple-50 via-pink-50 to-purple-50 rounded-2xl shadow-lg p-8">
+                    <h2 class="romantic text-3xl text-center text-purple-600 mb-6">Contando los días para nuestro 9º mes juntos</h2>
                     <div class="grid grid-cols-4 gap-4 text-center">
                         <div class="bg-white p-4 rounded-lg shadow">
-                            <div id="days" class="text-4xl font-bold text-pink-600 mb-2">00</div>
+                            <div id="days" class="text-4xl font-bold text-purple-600 mb-2">00</div>
                             <p class="handwritten text-gray-600">Días</p>
                         </div>
                         <div class="bg-white p-4 rounded-lg shadow">
-                            <div id="hours" class="text-4xl font-bold text-pink-600 mb-2">00</div>
+                            <div id="hours" class="text-4xl font-bold text-purple-600 mb-2">00</div>
                             <p class="handwritten text-gray-600">Horas</p>
                         </div>
                         <div class="bg-white p-4 rounded-lg shadow">
-                            <div id="minutes" class="text-4xl font-bold text-pink-600 mb-2">00</div>
+                            <div id="minutes" class="text-4xl font-bold text-purple-600 mb-2">00</div>
                             <p class="handwritten text-gray-600">Minutos</p>
                         </div>
                         <div class="bg-white p-4 rounded-lg shadow">
-                            <div id="seconds" class="text-4xl font-bold text-pink-600 mb-2">00</div>
+                            <div id="seconds" class="text-4xl font-bold text-purple-600 mb-2">00</div>
                             <p class="handwritten text-gray-600">Segundos</p>
                         </div>
                     </div>
@@ -783,18 +818,18 @@ C<html>
         <!-- Actualizar la sección de números especiales -->
         <section class="py-16 bg-white">
             <div class="container mx-auto px-4">
-                <h2 class="romantic text-4xl text-center text-pink-600 mb-12">Nuestros Números Especiales</h2>
+                <h2 class="romantic text-4xl text-center text-purple-600 mb-12">Nuestros Números Especiales</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-                    <div class="text-center p-6 bg-pink-50 rounded-xl shadow-lg transform hover:scale-105 transition-all">
-                        <div class="text-4xl font-bold text-pink-600 mb-2">240</div>
+                    <div class="text-center p-6 bg-purple-50 rounded-xl shadow-lg transform hover:scale-105 transition-all">
+                        <div class="text-4xl font-bold text-purple-600 mb-2">242</div>
                         <p class="handwritten text-gray-600">Días Juntos</p>
                     </div>
-                    <div class="text-center p-6 bg-purple-50 rounded-xl shadow-lg transform hover:scale-105 transition-all">
-                        <div class="text-4xl font-bold text-purple-600 mb-2">8</div>
+                    <div class="text-center p-6 bg-pink-50 rounded-xl shadow-lg transform hover:scale-105 transition-all">
+                        <div class="text-4xl font-bold text-pink-600 mb-2">8</div>
                         <p class="handwritten text-gray-600">Meses de Amor</p>
                     </div>
-                    <div class="text-center p-6 bg-pink-50 rounded-xl shadow-lg transform hover:scale-105 transition-all">
-                        <div class="text-4xl font-bold text-pink-600 mb-2">∞</div>
+                    <div class="text-center p-6 bg-purple-50 rounded-xl shadow-lg transform hover:scale-105 transition-all">
+                        <div class="text-4xl font-bold text-purple-600 mb-2">∞</div>
                         <p class="handwritten text-gray-600">Sonrisas Compartidas</p>
                     </div>
                 </div>
@@ -802,7 +837,7 @@ C<html>
         </section>
 
         <!-- Banner con carta -->
-        <section class="py-10 bg-gradient-to-r from-pink-100 to-purple-100">
+        <section class="py-10 bg-gradient-to-r from-purple-100 to-pink-100">
             <div class="container mx-auto px-4">
                 <div class="flex flex-col md:flex-row items-center">
                     <div class="w-full md:w-1/2 relative">
@@ -962,29 +997,29 @@ C<html>
         <!-- Mensajes sorpresa -->
         <section class="py-12 bg-white">
             <div class="container mx-auto px-4">
-                <h2 class="romantic text-4xl text-center text-pink-600 mb-8">Mensajes Especiales</h2>
+                <h2 class="romantic text-4xl text-center text-purple-600 mb-8">Mensajes Especiales</h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
                     <div class="paper p-4 transform rotate-2 cursor-pointer message-card">
-                        <h3 class="romantic text-xl text-pink-500 mb-2 text-center">Toca para abrir</h3>
+                        <h3 class="romantic text-xl text-purple-500 mb-2 text-center">Toca para abrir</h3>
                         <p class="handwritten text-center text-gray-500">Un mensaje secreto para ti...</p>
-                        <div class="message-content hidden p-4 mt-2 bg-pink-100 rounded-lg">
+                        <div class="message-content hidden p-4 mt-2 bg-purple-100 rounded-lg">
                             <p class="handwritten text-center">Te amo por todas las pequeñas cosas que haces. Por tu sonrisa al despertar y por cómo me abrazas cuando más lo necesito (Gracias por tenerme siempre tanta paciencia).</p>
                         </div>
                     </div>
                     
                     <div class="paper p-4 transform -rotate-1 cursor-pointer message-card">
-                        <h3 class="romantic text-xl text-pink-500 mb-2 text-center">Toca para abrir</h3>
+                        <h3 class="romantic text-xl text-purple-500 mb-2 text-center">Toca para abrir</h3>
                         <p class="handwritten text-center text-gray-500">Un secreto de mi corazón...</p>
-                        <div class="message-content hidden p-4 mt-2 bg-pink-100 rounded-lg">
+                        <div class="message-content hidden p-4 mt-2 bg-purple-100 rounded-lg">
                             <p class="handwritten text-center">Cuando te miro, veo mi presente y mi futuro. No puedo imaginar mi vida sin ti a mi lado corazon.</p>
                         </div>
                     </div>
                     
                     <div class="paper p-4 transform rotate-1 cursor-pointer message-card">
-                        <h3 class="romantic text-xl text-pink-500 mb-2 text-center">Toca para abrir</h3>
+                        <h3 class="romantic text-xl text-purple-500 mb-2 text-center">Toca para abrir</h3>
                         <p class="handwritten text-center text-gray-500">Una confesión para ti...</p>
-                        <div class="message-content hidden p-4 mt-2 bg-pink-100 rounded-lg">
+                        <div class="message-content hidden p-4 mt-2 bg-purple-100 rounded-lg">
                             <p class="handwritten text-center">A veces te observo cuando no te das cuenta, solo para apreciar lo afortunado que soy de tenerte en mi vida.</p>
                         </div>
                     </div>
@@ -993,13 +1028,11 @@ C<html>
         </section>
 
         <!-- Footer -->
-        <footer class="py-8 bg-pink-200">
+        <footer class="py-8 bg-purple-200">
             <div class="container mx-auto px-4 text-center">
-                <p class="romantic text-xl text-pink-600 mb-2">Con todo mi amor para ti</p>
+                <p class="romantic text-xl text-purple-600 mb-2">Con todo mi amor para ti</p>
                 <p class="handwritten mb-8">Siempre tuyo mi amor</p>
-                <!-- Botón invisible -->
-                <a href="secreto.html" class="inline-block w-32 h-12 bg-transparent hover:bg-transparent focus:outline-none cursor-default absolute left-1/2 transform -translate-x-1/2" style="opacity: 0; pointer-events: auto;"></a>
-                <button id="reset-button" class="mt-4 bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full focus:outline-none shadow-md">
+                <button id="reset-button" class="mt-4 bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-full focus:outline-none shadow-md">
                     Volver al inicio
                 </button>
             </div>
@@ -1022,11 +1055,41 @@ C<html>
     <!-- Actualizar solo el script del botón de entrada -->
     <script>
     $(document).ready(function() {
-        // Botón de entrada (versión simplificada y confiable)
+        // Configurar la fecha objetivo (2 de mayo de 2025, 5:18 am)
+        const targetDate = new Date('2025-05-02T05:18:00');
+        
+        // Función para actualizar el contador
+        function updateCountdown() {
+            const now = new Date();
+            const difference = targetDate - now;
+            
+            if (difference <= 0) {
+                // Si ya pasó la fecha objetivo
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                return;
+            }
+            
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        // Actualizar el contador cada segundo
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Llamar inmediatamente para evitar retraso inicial
+        
+        // Botón de entrada
         $('#enter-btn').click(function() {
-            // Ocultar la pantalla de bienvenida
             $('#welcome-screen').fadeOut(1000, function() {
-                // Mostrar el contenido principal
                 $('#main-content').fadeIn(1000);
             });
         });
@@ -1035,8 +1098,86 @@ C<html>
         $('#main-content').hide();
         $('#welcome-screen').show();
 
-        // Mantener el resto del código JavaScript existente igual...
-        // (El resto del script se mantiene sin cambios)
+        // Función para crear estrellas
+        function createStar() {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * window.innerWidth + 'px';
+            star.style.top = Math.random() * window.innerHeight + 'px';
+            star.style.animationDuration = Math.random() * 2 + 1 + 's';
+            document.body.appendChild(star);
+            setTimeout(() => star.remove(), 2000);
+        }
+
+        // Función para crear fuegos artificiales
+        function createFirework(x, y) {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Crear el centro del fuego artificial
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            firework.style.left = x + 'px';
+            firework.style.top = y + 'px';
+            firework.style.backgroundColor = color;
+            document.body.appendChild(firework);
+
+            // Crear partículas
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.backgroundColor = color;
+                
+                // Calcular dirección aleatoria
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 5 + Math.random() * 5;
+                const tx = Math.cos(angle) * velocity * 20;
+                const ty = Math.sin(angle) * velocity * 20;
+                
+                particle.style.setProperty('--tx', tx + 'px');
+                particle.style.setProperty('--ty', ty + 'px');
+                
+                document.body.appendChild(particle);
+                setTimeout(() => particle.remove(), 1000);
+            }
+
+            setTimeout(() => firework.remove(), 1000);
+        }
+
+        // Evento para el botón de amor
+        $('#love-btn').click(function(e) {
+            // Crear estrellas
+            for (let i = 0; i < 20; i++) {
+                setTimeout(createStar, i * 100);
+            }
+
+            // Crear fuegos artificiales
+            const rect = e.target.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+            
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const randomX = x + (Math.random() - 0.5) * 200;
+                    const randomY = y + (Math.random() - 0.5) * 200;
+                    createFirework(randomX, randomY);
+                }, i * 200);
+            }
+
+            // Reproducir sonido
+            const heartSound = document.getElementById('heart-sound');
+            heartSound.currentTime = 0;
+            heartSound.play();
+        });
+
+        // Evento para el botón de reset
+        $('#reset-button').click(function() {
+            $('#main-content').fadeOut(1000, function() {
+                $('#welcome-screen').fadeIn(1000);
+            });
+        });
     });
     </script>
   </body>
